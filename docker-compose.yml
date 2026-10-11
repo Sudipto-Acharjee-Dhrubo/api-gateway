@@ -1,0 +1,21 @@
+# docker compose up --build
+# Gateway on :3000, Redis, and two mock upstreams (users :4001, orders :4002)
+services:
+  redis:
+    image: redis:7-alpine
+    ports: ["6379:6379"]
+
+  mock:
+    build: .
+    command: ["node", "mock-upstream/server.js"]
+    ports: ["4001:4001", "4002:4002"]
+
+  gateway:
+    build: .
+    ports: ["3000:3000"]
+    environment:
+      REDIS_URL: redis://redis:6379
+      JWT_SECRET: change-me-in-real-life
+      UPSTREAM_USERS: http://mock:4001
+      UPSTREAM_ORDERS: http://mock:4002
+    depends_on: [redis, mock]

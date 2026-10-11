@@ -1,0 +1,23 @@
+{
+  "name": "api-gateway",
+  "version": "1.0.0",
+  "description": "Reverse-proxy API gateway with JWT/API-key auth, Redis token-bucket rate limiting, circuit breaking and metrics",
+  "main": "src/server.js",
+  "type": "commonjs",
+  "scripts": {
+    "start": "node src/server.js",
+    "dev": "node --watch src/server.js",
+    "mock": "node mock-upstream/server.js",
+    "test": "node --test --test-force-exit"
+  },
+  "engines": {
+    "node": ">=20"
+  },
+  "license": "MIT",
+  "dependencies": {
+    "express": "^4.22.3",
+    "http-proxy-middleware": "^3.0.7",
+    "ioredis": "^5.11.1",
+    "jsonwebtoken": "^9.0.3"
+  }
+}

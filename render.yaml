@@ -1,0 +1,26 @@
+# Render Blueprint (optional). You can also create these by hand in the dashboard.
+# Verify field names against https://render.com/docs/blueprint-spec before using.
+services:
+  - type: web
+    name: gateway
+    runtime: docker
+    plan: free
+    healthCheckPath: /health
+    envVars:
+      - key: JWT_SECRET
+        generateValue: true
+      - key: REDIS_URL          # paste your Upstash (rediss://...) or Render Key Value URL
+        sync: false
+      - key: UPSTREAM_USERS     # URL of the mock service below, e.g. https://gateway-mock.onrender.com
+        sync: false
+      - key: UPSTREAM_ORDERS
+        sync: false
+
+  - type: web
+    name: gateway-mock
+    runtime: docker
+    plan: free
+    healthCheckPath: /anything
+    envVars:
+      - key: SERVICE
+        value: mock

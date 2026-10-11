@@ -1,0 +1,10 @@
+{
+  "plans": {
+    "free": { "capacity": 5,  "refillPerSec": 1,  "dailyQuota": 1000 },
+    "pro":  { "capacity": 50, "refillPerSec": 10, "dailyQuota": 100000 }
+  },
+  "clients": {
+    "demo-free-key-123": { "id": "alice", "plan": "free" },
+    "demo-pro-key-456":  { "id": "bob",   "plan": "pro"  }
+  }
+}
